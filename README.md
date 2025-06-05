@@ -1,54 +1,58 @@
-# React + TypeScript + Vite
+# Skip Selection App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A responsive React + MUI (Material-UI) web application that allows users to select a skip size and confirm their choice through an intuitive UI with stepper navigation and confirmation dialogs.
 
-Currently, two official plugins are available:
+## 📦 Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Skip Selection Cards**: Users can select from a range of available skips. The selected card is visually highlighted.
+- **Confirmation Dialog**: On selecting a skip, a dialog appears immediately to confirm the user's choice.
+- **Floating Stepper**: A horizontally fixed stepper guides the user through the selection process. It expands on hover to show step labels.
+- **Responsive Design**: Optimized for mobile and desktop using MUI's `useMediaQuery`.
 
-## Expanding the ESLint configuration
+## 💡 Components Overview
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### `SkipPage.tsx`
+- Main page container.
+- Fetches available skips.
+- Renders:
+  - Page title and underline.
+  - `HorizontalStepper` (desktop only).
+  - `SkipCard` grid.
+  - `ConfirmationDialog` component (on selection).
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+### `SkipCard.tsx`
+- Displays each skip with its size and price.
+- Allows users to select or unselect a skip.
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### `ConfirmationDialog.tsx`
+- A reusable dialog component that appears immediately when a skip is selected.
+- Shows selected skip name and price.
+- Offers Cancel and Confirm options.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+### `HorizontalStepper.tsx`
+- A custom stepper that floats at the bottom of the screen.
+- Expands on hover to reveal step labels.
+- Highlights the active step with scaling and color transition animations.
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+## 🖌️ Styling & UX Decisions
+
+- **Stepper Color**: Switched to white icons with dark backgrounds for better contrast.
+- **Stepper Animation**: Slowed hover transition for smoother experience (`0.6s`).
+- **FAB Removed**: Originally used a Floating Action Button (`ContinueFAB`), but replaced with immediate dialog for cleaner flow.
+- **Dialogs**: Controlled via parent state. Confirmation shown without any floating buttons.
+
+## 🚀 Future Improvements
+
+- Add real routing to next steps after confirmation.
+- Integrate skip booking API.
+- Use Context or global state management (e.g. Zustand or Redux) for skip selection.
+- Add unit and integration tests using `React Testing Library`.
+
+## 🛠️ Tech Stack
+
+- React 18
+- TypeScript
+- Material UI (MUI v5)
+- Custom hooks (e.g. `useSkipsByLocation`)
+- Vite or Create React App (based on your setup)
+
