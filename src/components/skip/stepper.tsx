@@ -83,7 +83,7 @@ const HorizontalStepper = () => {
                       transform: hovered
                         ? "scale(1.2)"
                         : "scale(1)",
-                      transition: "transform 0.2s ease",
+                      transition: "transform 0.8s ease",
                     },
                   }}
                 >
